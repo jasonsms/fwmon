@@ -1,0 +1,20 @@
+{
+	"luci-app-fwmon": {
+		"description": "Grant access to fwmon (入站监控)",
+		"read": {
+			"file": {
+				"/tmp/fwmon/panel.json": [ "read" ],
+				"/etc/config/fwmon": [ "read" ]
+			},
+			"uci": [ "fwmon" ]
+		},
+		"write": {
+			"file": {
+				"/etc/init.d/fwmon": [ "exec" ],
+				"/usr/lib/fwmon/block.sh": [ "exec" ],
+				"/usr/lib/fwmon/unblock.sh": [ "exec" ]
+			},
+			"uci": [ "fwmon" ]
+		}
+	}
+}

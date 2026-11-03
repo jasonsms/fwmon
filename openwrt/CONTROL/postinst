@@ -1,0 +1,15 @@
+#!/bin/sh
+# fwmon postinst — enable + start the service on install/upgrade.
+[ -n "$IPKG_INSTROOT" ] && exit 0
+
+# Best-effort: create the optional auto-block nft set (harmless if nft absent).
+nft list table inet fwmon >/dev/null 2>&1 || \
+	nft create table inet fwmon 2>/dev/null || true
+nft list set inet fwmon fwmon_block >/dev/null 2>&1 || \
+	nft create set inet fwmon fwmon_block '{ type ipv6_addr; flags dynamic; timeout 1h; }' 2>/dev/null || true
+nft list set inet fwmon fwmon_block4 >/dev/null 2>&1 || \
+	nft create set inet fwmon fwmon_block4 '{ type ipv4_addr; flags dynamic; timeout 1h; }' 2>/dev/null || true
+
+/etc/init.d/fwmon enable 2>/dev/null
+/etc/init.d/fwmon start 2>/dev/null
+exit 0

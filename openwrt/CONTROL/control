@@ -1,0 +1,9 @@
+Package: luci-app-fwmon
+Version: 0.1.0-1
+Depends: libc, conntrack-tools, luci-base
+Architecture: aarch64_cortex-a53
+Maintainer: fwmon
+Section: net
+Priority: optional
+Source: fwmon
+Description: Inbound (L4) connection monitor for OpenWrt (入站监控), complementary to fn-knock (L7)

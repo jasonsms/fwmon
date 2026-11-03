@@ -1,0 +1,9 @@
+#!/bin/sh
+# fwmon postrm — clean up optional nft state on full removal.
+[ -n "$IPKG_INSTROOT" ] && exit 0
+case "$1" in
+	remove|purge)
+		nft delete table inet fwmon 2>/dev/null || true
+		;;
+esac
+exit 0

@@ -1,0 +1,6 @@
+#!/bin/sh
+# fwmon prerm — stop + disable the service before removal/upgrade.
+[ -n "$IPKG_INSTROOT" ] && exit 0
+/etc/init.d/fwmon stop 2>/dev/null
+/etc/init.d/fwmon disable 2>/dev/null
+exit 0
